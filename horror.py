@@ -39,6 +39,7 @@ class Tag(object):
 
     def __repr__(self):
         logger.debug(self.name)
+        return self.name
 
 
 class T(object):
@@ -88,9 +89,12 @@ class CustomTag(Tag):
 
 class MyLink(CustomTag):
     name = 'a' # FIXME should be able to inherit correctly direct tag but since they are under the instance of T
-    def init(self, title, url=None):
-        self.title = title
-        self.url = url if url else title
+    def __init__(self, title, url=None):
+        super(MyLink, self).__init__()
+        self.sub = (title, )
+        url = url if url else title
+        self.attr = {'href':url}
+
 
 class TagWithExtraRender(CustomTag):
     name = 'span'
