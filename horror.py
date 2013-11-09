@@ -39,6 +39,10 @@ class Tag(object):
         logger.debug('exit' + `self`)
 
     @property
+    def tag(self):
+        return self._dac
+
+    @property
     def children(self):
         return ''.join([child.render() for child in self._children])
 
@@ -112,9 +116,9 @@ class MyCustomWidget(TagFactory.div):
         super(MyCustomWidget, self).__init__()
         with self:
             self.attr['class'] = ' myclass'
-            self._dac.h2('My custom widget')
-            self._dac.div('Custom Text')
-            self._dac.MyLink(name, 'http://google.com')
+            self.tag.h2('My custom widget')
+            self.tag.div('Custom Text')
+            self.tag.MyLink(name, 'http://google.com')
 t = T()
 
 projects = [
