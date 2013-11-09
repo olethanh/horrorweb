@@ -112,9 +112,9 @@ class MyCustomWidget(TagFactory.div):
         super(MyCustomWidget, self).__init__()
         with self:
             self.attr['class'] = ' myclass'
-            t.h2('My custom widget')
-            t.div('Custom Text')
-            t.MyLink(name, 'http://google.com')
+            self._dac.h2('My custom widget')
+            self._dac.div('Custom Text')
+            self._dac.MyLink(name, 'http://google.com')
 t = T()
 
 projects = [
