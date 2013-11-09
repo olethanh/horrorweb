@@ -107,6 +107,14 @@ class TagWithExtraRender(TagFactory.Tag):
         return r + "<br/ >Added Text"
 
 
+class MyCustomWidget(TagFactory.div):
+    def __init__(self, name):
+        super(MyCustomWidget, self).__init__()
+        with self:
+            self.attr['class'] = ' myclass'
+            t.h2('My custom widget')
+            t.div('Custom Text')
+            t.MyLink(name, 'http://google.com')
 t = T()
 
 projects = [
@@ -120,6 +128,7 @@ with t.html():
     with t.body():
         t.button('mon button', type='text')
         t.MyLink('http://perdu.com')
+        t.MyCustomWidget('Hoho')
         t.h2('My projects')
         t.TagWithExtraRender('hello world')
         with t.ul():
