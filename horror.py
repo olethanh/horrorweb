@@ -12,11 +12,11 @@ class Tag(object):
 
     def __enter__(self):
         self._dac.set_current(self)
-        logger.debug('enter')
+        logger.debug('enter' + `self`)
 
     def __exit__(self, type, value, traceback):
         self._dac.pop_current(self)
-        logger.debug('exit')
+        logger.debug('exit' + `self`)
 
     @property
     def children(self):
@@ -39,7 +39,7 @@ class Tag(object):
 
     def __repr__(self):
         logger.debug(self.name)
-        return self.name
+        return self.name + ' ' + str(self.__class__)
 
 
 class T(object):
@@ -69,6 +69,7 @@ class T(object):
     def __getattr__(self, attribute):
         logger.debug('getattr %s %s', attribute, self.__dict__.keys())
         if attribute in CustomTagMeta.registred_tags:
+            logger.debug('GettingExistingElement %s', attribute)
             #return type( attribute, (CustomTagMeta.registred_tags[attribute],), {'_dac': self}) # ReRegister class each time
             klass = CustomTagMeta.registred_tags[attribute]
             klass._dac = self #FIXME : Will probably pose problem with multiple documents, since we modify class attribute
